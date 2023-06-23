@@ -57,7 +57,7 @@ const userSchema=mongoose.Schema({
     },
     ProfileURL:{
         type:String,                                //bcoz we will sent the image link which is a string
-        default:'img/users/default.jpeg'            //if user din't uploaded his image, so default image
+        default:'img/users/default.jpeg'            //if user din't uploaded his image, so default image 
     },
     resetToken:String
 })

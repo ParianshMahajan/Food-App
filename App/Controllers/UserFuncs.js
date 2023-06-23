@@ -10,6 +10,9 @@ const secret_key='asdfghjkl';
 
 
 
+
+
+//Profile Page
 module.exports.getUser= async function getUser(req,res){
     let id =req.id;     
     console.log(id);                     
@@ -34,6 +37,23 @@ module.exports.getUser= async function getUser(req,res){
 
 
 
+
+//All users by admin
+//isAuthorised -> to check the user's role [Admin,User,RestaurantOwner,DeliveryBoy]
+
+module.exports.isAuthorised=function isAuthorised(roles){
+    return async function(req,res,next){
+        if(roles.includes(req.role)==true){          //Since from frontend roles=['admin'], so if req.role=='admin' only then it will be true;
+            next();            
+        }
+        else{
+            res.status(401).json({
+                message:'Operation not allowed'
+            })
+        }
+    }
+}
+
 module.exports.getallUsers= async function getallUsers(req,res){
     let user=await collection1.find();
     res.json({
@@ -48,6 +68,7 @@ module.exports.getallUsers= async function getallUsers(req,res){
 
 
 
+//Updation/Deleiton
 
 module.exports.updateUser= async function updateUser(req,res){
     try{
@@ -81,12 +102,6 @@ module.exports.updateUser= async function updateUser(req,res){
     }
 }
 
-
-
-
-
-
-
 module.exports.deleteUser= async function deleteUser(req,res){
     try{
         let id =req.params.id;                
@@ -115,26 +130,10 @@ module.exports.deleteUser= async function deleteUser(req,res){
 
 
 
-//isAuthorised -> to check the user's role [Admin,User,RestaurantOwner,DeliveryBoy]
-
-module.exports.isAuthorised=function isAuthorised(roles){
-    return async function(req,res,next){
-        if(roles.includes(req.role)==true){          //Since from frontend roles=['admin'], so if req.role=='admin' only then it will be true;
-            next();            
-        }
-        else{
-            res.status(401).json({
-                message:'Operation not allowed'
-            })
-        }
-    }
-}
 
 
 
-
-
-
+//Resetpassword
 module.exports.resetpassword= async function resetpassword(req,res){
     try{
         let data =req.data;

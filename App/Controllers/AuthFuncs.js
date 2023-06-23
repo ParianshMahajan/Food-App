@@ -34,12 +34,6 @@ module.exports.Signup= async function Signup(req,res){
 
 
 
-
-
-
-
-
-
 //LOGIN
 
 module.exports.getlogin= async function getlogin(req,res){
@@ -88,9 +82,6 @@ module.exports.login= async function login(req,res){
 
 
 
-
-
-
 // FORGOT-PASSWORD
 
 module.exports.forgotpassword= async function forgotpassword(req,res){
@@ -115,16 +106,6 @@ module.exports.forgotpassword= async function forgotpassword(req,res){
         })
     }
 }
-
-
-
-
-
-
-
-
-
-
 
 
 
