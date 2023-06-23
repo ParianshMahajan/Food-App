@@ -1,4 +1,4 @@
-const collection1=require('../Collections/collection1');
+const {collection1}=require('../Collections/collection1');
 const jwt=require('jsonwebtoken');
 const secret_key='asdfghjkl';
 

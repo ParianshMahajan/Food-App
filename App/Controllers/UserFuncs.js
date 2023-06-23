@@ -1,4 +1,4 @@
-const collection1=require('../Collections/collection1');
+const {collection1}=require('../Collections/collection1');
 
 const express=require('express');
 const app=express();
