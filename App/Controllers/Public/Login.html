@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        
+        <label for="Email">Email :</label>
+        <input type="text" name="Email" id="Email">
+        
+        <label for="Password">Password :</label>
+        <input type="password" name="Password" id="Password">
+        
+        <button type="submit">Login</button>
+
+    </form>    
+</body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script>
+    let btn=document.querySelector('button');
+    btn.addEventListener('click',async (e)=>{
+
+        e.preventDefault();           //To prevent reloading.
+
+        let Email=document.querySelector("#Email").value;
+        let Password=document.querySelector("#Password").value;
+
+
+        let res=await axios.post('/auth/login',{Email,Password});
+        console.log('response',res);
+    })
+</script>
+
+</html>

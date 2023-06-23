@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+</head>
+<body>
+
+
+        <!-- Login container -->
+        <div class="container">
+            <form class="myform">
+                <h1>Signup</h1>
+                    <label for="Name">Name:</label>
+                    <input type="text" E-mail="Name" id="Name">
+                <br>
+                    <label for="Email">E-mail:</label>
+                    <input type="email" E-mail="Email" id="Email">
+                <br>
+                    <label for="Password">Password:</label>
+                    <input type="password" name="Password" id="Password">
+                <br>
+                    <label for="confPassword">Confirm Password:</label>
+                    <input type="password" name="confPassword" id="confPassword">
+                <br>
+                    <label for="PhoneNum">Phone Number:</label>
+                    <input type="number" name="PhoneNum" id="PhoneNum">
+                <br>
+                    <label for="Username">Username:</label>
+                    <input type="text" name="Username" id="Username">
+                <br>
+                    <label for="Role">Role:</label>
+                    <input type="text" name="Role" id="Role">
+                <br>
+                    <label for="ProfileURL">ProfilePic:</label>
+                    <input type="text" name="ProfileURL" id="ProfileURL">
+                <br>
+                <button>SignUp</button>
+                <br>
+            </form>
+        </div>
+
+
+
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script>
+    let btn=document.querySelector('button');
+    btn.addEventListener('click',async (e)=>{
+
+        e.preventDefault();           //To prevent reloading.
+
+        let Name=document.querySelector("#Name").value;
+        let Email=document.querySelector("#Email").value;
+        let Password=document.querySelector("#Password").value;
+        let ConfirmPassword=document.querySelector("#confPassword").value;
+        let PhoneNum=document.querySelector("#PhoneNum").value;
+        let Username=document.querySelector("#Username").value;
+        let Role=document.querySelector("#Role").value;
+        let ProfileURL=document.querySelector("#ProfileURL").value;
+
+
+        let resp=await axios.post('/auth/signup',{Name,Email,Password,ConfirmPassword,PhoneNum,Username,Role,ProfileURL});
+        console.log('resp',resp);
+    })
+</script>
+</html>
