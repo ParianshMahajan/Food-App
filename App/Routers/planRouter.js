@@ -1,49 +1,42 @@
 const express=require('express');
 const {collection1,plans}=require('../Collections/collection1');
-
+const {getAllPlans,createPlans,UpdatePlan,deletePlan,getPlan,top3plans}=require('../Controllers/PlansFuncs');
+const { isAuthorised } = require('../Controllers/UserFuncs');
+const protect = require('../Controllers/protectRouter');
 
 const planRouter=express.Router();
 
+//Admin
+
 planRouter
-.route('')
-.get(getPlans)
-.post(enterPlans)
+.route('/admin')
+.post(protect,isAuthorised(['Admin']),createPlans)
+
+planRouter
+.route('/admin/:id')
+.patch(protect,isAuthorised(['Admin']),UpdatePlan)
+.delete(protect,isAuthorised(['Admin']),deletePlan)
 
 
 
-async function getPlans(req,res){
-    try {
-        let user=await plans.find();
-        res.json({
-            Users:user
-        });
-    } catch (error) {
-        res.json({
-            message:error.message
-        })
-    }
-}
+//Current plan of the user
+planRouter
+.route('/userplan/:id')
+.get(getPlan)
 
 
-async function enterPlans(req,res){
-    try {
-        let data=req.body
-        let plan=await plans.create(data)
 
-        console.log(data);
-            
-        res.json({
-            message:"Plan Added",
-            data:data                       
-        });
+planRouter
+.route('/allplans')
+.get(getAllPlans)
 
-    } catch (error) {
-        res.json({
-            message:error.message
-        })
-    }
-}
 
+
+
+//top 3 plans
+planRouter
+.route('/top3plans')
+.get(top3plans)
 
 
 module.exports=planRouter

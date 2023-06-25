@@ -16,7 +16,7 @@ const planRouter = require('./Routers/planRouter');
 
 app.use('/user',userRouter);
 app.use('/auth',authRouter);
-app.use('/plans',planRouter);
+app.use('/plan',planRouter);
 
 
 
