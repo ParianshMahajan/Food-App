@@ -2,12 +2,14 @@ const mongoose=require('mongoose');
 const bcrypt=require('bcrypt');
 var validator = require("email-validator");
 const crypto=require('crypto')
+const {collection1,plans,reviews}=require('./MongoDB');
+
+
 
 
 
 
 //UserSchema
-
 const userSchema=mongoose.Schema({
 
     Name:{
@@ -77,6 +79,16 @@ userSchema.methods.createResetToken=function(){
 
 
 
+
+
+
+
+
+
+
+
+
+
 //PlansSchema
 const planSchema=mongoose.Schema({
 
@@ -90,9 +102,9 @@ const planSchema=mongoose.Schema({
         type:Number,
         required:true,
     },
-    Price:{
-        type:Number,
-        required:true,
+    createdAt:{
+        type:Date,
+        default:Date.now(),
     },
     Ratings:{
         type:Number,
@@ -109,4 +121,68 @@ const planSchema=mongoose.Schema({
 
 
 
-module.exports={userSchema,planSchema};
+
+
+
+
+
+
+
+
+//ReviewSchema
+const reviewSchema=mongoose.Schema({
+
+    Review:{
+        type:String,
+        required:[true,'Review is required']
+    },
+    Rating:{
+        type:Number,
+        min:1,
+        max:10,
+        required:[true,"Rating is required"]
+    },
+    createdAt:{
+        type:Date,
+        default:Date.now(),
+    },
+    User:{
+        type:mongoose.Schema.ObjectId,
+        ref:'collection1',
+        required:[true,'Review must belong to a user']
+    },
+    Plan:{
+        type:mongoose.Schema.ObjectId,
+        ref:'plans',
+        required:[true,'Review must belong to a plan']
+    },
+})
+
+
+//Adding hook to populate ids in plan and user
+
+//Here we used regex expression i.e whenevr a function like find, findbyid, findone is called, it will get executed
+
+reviewSchema.pre(/^find/,function(next){
+    this.populate({
+        path:"User",             //Where we want to populate
+        select:"Name ProfileURL"        //What we wan to fetch
+    })
+    .populate("Plan")               //Here we want to populate whole plan schema(whole properties...)
+    next();
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+module.exports={userSchema,planSchema,reviewSchema};

@@ -1,5 +1,5 @@
 const express=require('express');
-const {collection1,plans}=require('../Collections/collection1');
+const {collection1,plans}=require('../Collections/MongoDB');
 const {getAllPlans,createPlans,UpdatePlan,deletePlan,getPlan,top3plans}=require('../Controllers/PlansFuncs');
 const { isAuthorised } = require('../Controllers/UserFuncs');
 const protect = require('../Controllers/protectRouter');

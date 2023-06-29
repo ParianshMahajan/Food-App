@@ -1,4 +1,4 @@
-const {collection1}=require('../Collections/collection1');
+const {collection1}=require('../Collections/MongoDB');
 
 const express=require('express');
 const app=express();
@@ -76,14 +76,10 @@ module.exports.updateUser= async function updateUser(req,res){
         let id =req.id;              // Since we are using '/:id', so the user id is stored in req.params.id
             
 
-        // 1st method of updating
-        // let user=await collection1.findByIdAndUpdate(id,data);       
-
-        // 2nd method of updating
         let user=await collection1.findById(id);
 
         if(user){
-            let abc=await collection1.updateOne(user,data)
+            let abc=await collection1.findByIdAndUpdate(id,data)
 
             res.json({
                 message:'Data updated succesfully',

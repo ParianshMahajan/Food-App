@@ -14,7 +14,7 @@ mongoose.connect(db_link)
     console.log(err);
 })
 
-const {userSchema,planSchema}=require("./schemas")
+const {userSchema,planSchema,reviewSchema}=require("./schemas")
 
 
 
@@ -30,4 +30,11 @@ const plans=mongoose.model('plans',planSchema);
 
 
 
-module.exports={collection1,plans};
+
+
+//Reviews
+const reviews=mongoose.model('reviews',reviewSchema);
+
+
+
+module.exports={collection1,plans,reviews};

@@ -1,13 +1,13 @@
-const {collection1,plans}=require('../Collections/collection1');
+const {collection1,plans}=require('../Collections/MongoDB');
 const jwt=require('jsonwebtoken');
 const secret_key='asdfghjkl';
 
 
 module.exports.getAllPlans= async function getAllPlans(req,res){
     try {
-        let user=await plans.find();
+        let plan=await plans.find();
         res.json({
-            Users:user
+            Plans:plan
         });
     } catch (error) {
         res.status(500).json({
@@ -76,7 +76,7 @@ module.exports.UpdatePlan= async function UpdatePlan(req,res){
         let plan=await plans.findById(id);
 
         if(plan){
-            let abc=await plans.updateOne(plan,data)
+        let abc=await plans.findByIdAndUpdate(id,data)
 
             res.json({
                 message:'Plan updated succesfully',
