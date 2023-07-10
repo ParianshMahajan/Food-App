@@ -14,11 +14,11 @@ module.exports.Signup= async function Signup(req,res){
         let data=req.body;
         let user=await collection1.create(data);
         
-        console.log(data);
+        console.log(user);
             
         res.json({
             message:"User signed up",
-            data:data                       
+            data:user                       
         });
         
     }

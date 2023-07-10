@@ -51,11 +51,11 @@ module.exports.createPlans= async function createPlans(req,res){
         let data=req.body
         let plan=await plans.create(data)
 
-        console.log(data);
+        console.log(plan);
             
         res.json({
             message:"Plan Added",
-            data:data                       
+            data:plan                       
         });
 
     } catch (error) {
